@@ -1,0 +1,69 @@
+﻿@using User_Identity_App.ViewModel;
+@model LoginVm;
+
+@{
+    ViewData["Title"] = "Log in Your Account";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <h4> Log in your Account</h4>
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12  alert alert-danger">
+                <span>
+                    <b>Sorry!</b> - @TempData["Error"]
+                </span>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <label asp-for="EmailAddress" class="control-label"></label>
+                            <input asp-for="EmailAddress" class="form-control" />
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                  @*  <div class="mb-3">
+                        <div class="form-group">
+                            <div class="custom-checkbox">
+                                <label asp-for="RememberMe">
+                                    <input asp-for="RememberMe" />
+                                    @Html.DisplayNameFor(m => m.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <input class="btn btn-outline-success" style="float:right;" type="submit" value="Log in">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="from-group">
+                            <p>
+                                <a asp-action="Register"> Register as a new user?</a>
+                            </p>
+                            <p>
+                                <a asp-action="ForgetPassword"> Forgot your passowrd?</a>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@using User_Identity_App.ViewModel;
+@model RegisterVm;
+
+@{
+    ViewData["Title"] = "Sign in for a new acount";
+
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <h4> Sign up for a new account</h4>
+        @if (TempData["Error"] != null)
+        {
+            <div class="col-md-12  alert alert-danger">
+                <span>
+                    <b>Sorry!</b> - @TempData["Error"]
+                </span>
+            </div>
+        }
+        <div class="col-md-8 offset-2">
+
+            <form asp-controller="Account" asp-action="Register" method="post" role="form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="md-3">
+                    <div class="form-group">
+                        <label asp-for="Username" class="control-label"></label>
+                        <input asp-for="Username" class="form-control" />
+                        <span asp-validation-for="Username" class="tex-danger"></span>
+                    </div>
+                </div>
+                <div class="md-3">
+                    <div class="form-group">
+                        <label asp-for="EmailAddress" class="control-label"></label>
+                        <input asp-for="EmailAddress" class="form-control" />
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="md-3">
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="form-group">
+                        <input class="btn btn-outline-success" style="float:right;" type="submit" value="Register">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
