@@ -19,12 +19,12 @@ builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration.GetSe
 builder.Services.AddAuthentication()
     .AddFacebook(options =>
     {
-        options.AppId = "116271057977051";
-        options.AppSecret = "768eef5e9acbf168043959913e2fc3fe";
+        options.AppId = "test";
+        options.AppSecret = "test";
     })
     .AddGoogle(options => {
-        options.ClientId = "261139706036-p5sdtuvgq07bjfdtlma975aln61me1sa.apps.googleusercontent.com";
-        options.ClientSecret = "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";
+        options.ClientId = "test";
+        options.ClientSecret = "Test";
     });
 
 builder.Services.Configure<IdentityOptions>(op =>
