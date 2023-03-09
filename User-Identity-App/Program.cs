@@ -16,6 +16,17 @@ builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<A
     .AddDefaultTokenProviders();
 builder.Services.AddTransient<ISendGridEmail, SendGridEmail>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration.GetSection("SendGrid"));
+builder.Services.AddAuthentication()
+    .AddFacebook(options =>
+    {
+        options.AppId = "116271057977051";
+        options.AppSecret = "768eef5e9acbf168043959913e2fc3fe";
+    })
+    .AddGoogle(options => {
+        options.ClientId = "261139706036-p5sdtuvgq07bjfdtlma975aln61me1sa.apps.googleusercontent.com";
+        options.ClientSecret = "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";
+    });
+
 builder.Services.Configure<IdentityOptions>(op =>
 {
     op.Password.RequireLowercase = true;

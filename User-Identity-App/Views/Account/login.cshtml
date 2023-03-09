@@ -1,5 +1,7 @@
 ﻿@using User_Identity_App.ViewModel;
+@using Microsoft.AspNetCore.Identity;
 @model LoginVm;
+@inject SignInManager<AppUser> signInManager;
 
 @{
     ViewData["Title"] = "Log in Your Account";
@@ -18,7 +20,7 @@
         }
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" role="form">
+                <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form">
 
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="mb-3">
@@ -35,20 +37,10 @@
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
                     </div>
-                  @*  <div class="mb-3">
-                        <div class="form-group">
-                            <div class="custom-checkbox">
-                                <label asp-for="RememberMe">
-                                    <input asp-for="RememberMe" />
-                                    @Html.DisplayNameFor(m => m.RememberMe)
-                                </label>
-                            </div>
-                        </div>
-                    </div>*@
 
                     <div class="mb-3">
                         <div class="form-group">
-                            <input class="btn btn-outline-success" style="float:right;" type="submit" value="Log in">
+                            <input class="btn btn-outline-success" style="display:flex;" type="submit" value="Log in">
                         </div>
                     </div>
                     <div class="mb-3">
@@ -63,7 +55,35 @@
                     </div>
                 </form>
             </div>
-        </div>
 
+        </div>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                @{
+                    var scheme = await signInManager.GetExternalAuthenticationSchemesAsync();
+                    var loginProvider = scheme.ToList();
+                }
+                @if (loginProvider.Count() > 0)
+                {
+                    <h4>Use another Service to login in</h4>
+                    <form asp-asp-controller="AccountController" asp-action="ExternalLogin"
+                      asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                        <div class="mb-3">
+                            <div class="form-group">
+                                @foreach (var provider in loginProvider)
+                                {
+                                    <button type="submit" class="btn btn-outline-success" name="provider" value="@provider.Name"
+                                    title="Log in using your @provider.Name account">
+                                        @provider.Name
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
     </div>
+
+
 </div>

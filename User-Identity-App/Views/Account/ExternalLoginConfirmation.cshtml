@@ -1,0 +1,37 @@
+﻿@using User_Identity_App.ViewModel;
+@model ExternalLoginConfirmationVm;
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <h1>Register</h1>
+        <h4>Asscoiate Your @ViewData["ProviderDisplayName"] account.</h4>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-controller="Account" asp-action="ExternalLoginConfirmation" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" role="form">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <label asp-for="EmailAddress" class="control-label"></label>
+                            <input asp-for="EmailAddress" class="form-control" />
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <input class="btn btn-outline-success" style="display:flex;" type="submit" value="Log in">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
